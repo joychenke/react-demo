@@ -32,7 +32,7 @@ class Board extends React.Component {
     for(let i = 0; i < 3; i ++) {
       let arr = []
       for(let j = 0; j < 3;  j ++){
-        arr.push(this.renderSquare(i*3 + j, 'x_'+j+i))
+        arr.push(this.renderSquare(i*3 + j, j))
       }
       result.push(<div className="board-row" key={i}>
         {arr}
@@ -65,7 +65,7 @@ class Game extends React.Component {
     const squares = current.squares.slice();
 
     // 分出胜负，or 输入框有值，不处理
-    if(calcuateWinner(squares) || squares[i]){
+    if(calcuateWinner(squares).winner || squares[i]){
       return
     }
     // xIsNext是true，填入X，否则填入O
@@ -101,7 +101,7 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const {winner, wLine = []} = calcuateWinner(current.squares) || {};
+    const {winner, wLine = []} = calcuateWinner(current.squares);
     const isAscend = this.state.isAscend
 
     // 根据升序降序，显示不同的
@@ -125,7 +125,7 @@ class Game extends React.Component {
         moves.unshift(liItem)
       }
     })
-    const isDraw = current.squares.every(item => !Object.is(item, null))
+    const isDraw = !winner && current.squares.every(item => !Object.is(item, null))
     let status = ""
     if(isDraw) {
       status = "It's a draw"
@@ -173,10 +173,18 @@ function calcuateWinner(squares){
     [0, 4, 8],
     [2, 4, 6]
   ];
-  for(let i = 0; i < lines.length; i ++) {
-    const [a, b, c] = lines[i]
+  return lines.reduce((result, arr) => {
+    let winner = '', wLine = []
+    const [a, b, c] =  arr
     if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return {winner: squares[a], wLine: lines[i]}
+      winner = squares[a]
+      wLine = [...arr]
     }
-  }
+    // 有赢的
+    if(winner){
+      result.winner = winner
+      result.wLine = Array.from(new Set([...wLine, ...result.wLine]))
+    }
+    return result
+  }, {winner: "", wLine: []})
 };
