@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Clock from "./clock.js"
 import './index.css'
 
 // 修改成函数组件Square，绑定的方式还是花括号
@@ -156,9 +157,16 @@ class Game extends React.Component {
 }
 
 // ========================================
-
+const element = (
+  <div>
+    <Game />
+    <Clock></Clock>
+    <Clock></Clock>
+    <Clock></Clock>
+  </div>
+)
 ReactDOM.render(
-  <Game />,
+  element,
   document.getElementById('root')
 );
 
