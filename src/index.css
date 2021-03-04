@@ -63,3 +63,10 @@ ol, ul {
 .moveClass ol{
   padding-left: 5px;
 }
+.bgColor{
+  background-color: aquamarine;
+}
+.bigWord{
+  color: red;
+  font-size: 25px;
+}

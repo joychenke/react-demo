@@ -6,7 +6,7 @@ import './index.css'
 function Square(props) {
   return (
   <button 
-    className="square" 
+    className={props.cName + ' square'} 
     // 函数组件，不需要写this
     onClick={props.onClick}>
     {props.value}
@@ -15,10 +15,15 @@ function Square(props) {
 
 // 向受控组件，传参数，
 class Board extends React.Component {
-  renderSquare(i,j) {
+  setSquareColor(i) {
+    return this.props.wLine.includes(i) ? 'bgColor' : ''
+  }
+
+  renderSquare(i, key) {
     return (<Square 
     value={this.props.squares[i]}
-    key={j}
+    cName={this.setSquareColor(i)}
+    key={key}
     onClick={() => this.props.onClick(i)}/>);
   }
 
@@ -96,7 +101,7 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calcuateWinner(current.squares);
+    const {winner, wLine = []} = calcuateWinner(current.squares) || {};
     const isAscend = this.state.isAscend
 
     // 根据升序降序，显示不同的
@@ -120,8 +125,11 @@ class Game extends React.Component {
         moves.unshift(liItem)
       }
     })
+    const isDraw = current.squares.every(item => !Object.is(item, null))
     let status = ""
-    if(winner) {
+    if(isDraw) {
+      status = "It's a draw"
+    }else if(winner) {
       status = `This winner is:${winner}`
     }else {
       status = `Next player is: ${this.state.xIsNext ? 'X' : 'O'}`
@@ -132,13 +140,14 @@ class Game extends React.Component {
         <div className="game-board">
           <Board 
             squares={current.squares}
+            wLine={wLine}
             // 这里的入参i，由受控组件传过来的
             onClick={(i) => this.handleClick(i)}
           />
         </div>
         <div className="game-info">
           <button onClick={() => this.handleSort()}>{sortBtnLabel}</button>
-          <div>{status}</div>
+          <div className={isDraw ? 'bigWord' : ''}>{status}</div>
           <ol>{moves}</ol>
         </div>
       </div>
@@ -167,7 +176,7 @@ function calcuateWinner(squares){
   for(let i = 0; i < lines.length; i ++) {
     const [a, b, c] = lines[i]
     if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a]
+      return {winner: squares[a], wLine: lines[i]}
     }
   }
 };
