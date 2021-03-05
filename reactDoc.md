@@ -15,14 +15,14 @@
 ## State & 生命周期
 1. state只能定义在构造函数中，是当前组件私有的，完全受控于当前组件
 2. 当前组件中的方法，可以直接通过this.setState() 方法来修改state对象中存的属性
-3. 组价内部，有两个钩子函数（也叫生命周期方法），componentDidMount（组件挂载完成），componentDidMount（组件将要卸载）
+3. 组价内部，有两个钩子函数（也叫生命周期方法），componentDidMount（组件挂载完成），componentWillUnmount（组件将要卸载）
 4. React知道state改变后，会去重新调用 render() 方法，更新DOM
 5. 不要直接修改state方法，而要用this.setState()来修改
-6. setState的参数除了是对象，还可以是函数
+6. setState的参数除了是对象，还可以是函数。函数接收两个参数，上一个state，和此时的props
   ```javascript
-    this.setState(() => {
+    this.setState((state, props) => {
       counter: state.counter + props.increment
     })
   ```
 7. state的更新会被合并，很像Object.assign，只会修改改动过的那个state对象属性
-8. react中数据是自上而下，单向流动的。state是局部部的，只能自己改。当前组件的数据可以选择传给子组件，但是子组件并不知道props里的数据，来自于父的state还是prop，还是直接传的值
+8. react中数据是**自上而下，单向流动**的。state是局部的，只能自己改。当前组件的数据可以选择传给子组件，但是子组件并不知道props里的数据，来自于父的state还是prop，还是直接传的值
