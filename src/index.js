@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Clock from "./clock.js"
 import ClickEvent from"./clickEvent.js"
+import {ConditionLayout} from "./conditionLayout.js"
 import './index.css'
 
 // 修改成函数组件Square，绑定的方式还是花括号
@@ -162,8 +163,7 @@ const element = (
   <div>
     <Game />
     <ClickEvent/>
-    <Clock></Clock>
-    <Clock></Clock>
+    <ConditionLayout/>
     <Clock></Clock>
   </div>
 )

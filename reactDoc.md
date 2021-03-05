@@ -48,3 +48,9 @@
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
 <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
 ```
+
+## 条件渲染
+1. 条件渲染方法一：跟其他的js逻辑一样，用if来判断，render中需要渲染的元素
+2. 条件渲染方法二：condition && JSX代码 的方式。当condition是false，返回值false，后面的JSX不会渲染；condition是true，返回值是JSX表达式，右侧的元素会渲染
+3. 条件渲染方法三：三目运算表达式
+4. 阻止条件渲染方法：让render方法返回null。返回null时，不会影响组件的生命周期。
