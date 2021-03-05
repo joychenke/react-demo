@@ -26,3 +26,25 @@
   ```
 7. state的更新会被合并，很像Object.assign，只会修改改动过的那个state对象属性
 8. react中数据是**自上而下，单向流动**的。state是局部的，只能自己改。当前组件的数据可以选择传给子组件，但是子组件并不知道props里的数据，来自于父的state还是prop，还是直接传的值
+
+## 事件处理
+1. 事件名的命名方式是小驼峰；传的是花括号括起来的事件处理函数，而不是字符串；
+2. react的事件处理函数中自带合成事件e，是react封装好的，不需要考虑它跨浏览器的兼容性；
+3. 阻止默认事件用e.preventDefault() 方法；为DOM添加监听器，只需要在元素初始渲染时添加；
+4. 给事件传入自定义的事件方法时，要把this绑定为当前组件，有两种解决方法，bind和handleClick方法用箭头函数。具体看文档。
+```javascript 
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this)
+  }
+```
+```javascript
+  handleClick = () => {
+    // 里面的this，是当前组件
+  }
+```
+5. 向事件处理函数传参，可以直接用箭头函数的方式，也可以用bind方式，将要传的参数作为this后面的参数
+```html
+<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+```
