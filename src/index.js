@@ -5,6 +5,7 @@ import ClickEvent from"./clickEvent.js"
 import {ConditionLayout} from "./conditionLayout.js"
 import {ListItem} from "./listItem.js"
 import { Form } from './form.js'
+import { Calculator } from './statusElevate.js'
 import './index.css'
 
 // 修改成函数组件Square，绑定的方式还是花括号
@@ -169,6 +170,8 @@ const element = (
     <ListItem numbers={[1,2,3,'4','a']}/>
     <Form/>
     <Clock></Clock>
+    <hr></hr>
+    <Calculator></Calculator>
   </div>
 )
 ReactDOM.render(

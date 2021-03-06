@@ -127,10 +127,10 @@ export class Form extends React.Component {
             表单元素共用一个onChange事件2：
             <input checked={this.state.isMarried} name="isMarried" type="checkbox" onChange={this.handleChangeSecondForm}></input>
           </label>
-          <label>
+          {/* <label>
             受控输入为null，or undefined时，可编辑：
             <input value={this.state.editIpt}/>
-          </label>
+          </label> */}
         </form>
       </div>
     );
