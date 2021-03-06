@@ -70,3 +70,20 @@ ol, ul {
   color: red;
   font-size: 25px;
 }
+
+.splitpane{
+  display: flex;
+}
+.splitpane-left{
+  flex: 1 1 auto;
+  background: blanchedalmond;
+}
+.splitpane-middle{
+  color: goldenrod;
+  background:rgb(132, 246, 250);
+}
+.splitpane-right{
+  width: 100px;
+  flex: none;
+  background-color: cornflowerblue;
+}

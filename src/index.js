@@ -6,6 +6,7 @@ import {ConditionLayout} from "./conditionLayout.js"
 import {ListItem} from "./listItem.js"
 import { Form } from './form.js'
 import { Calculator } from './statusElevate.js'
+import { Combination } from './combination.js'
 import './index.css'
 
 // 修改成函数组件Square，绑定的方式还是花括号
@@ -172,6 +173,7 @@ const element = (
     <Clock></Clock>
     <hr></hr>
     <Calculator></Calculator>
+    <Combination></Combination>
   </div>
 )
 ReactDOM.render(
