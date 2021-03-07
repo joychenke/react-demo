@@ -1,0 +1,7 @@
+.productRow{
+  display: flex;
+}
+
+.productRow-left{
+  margin-right: 20px;
+}

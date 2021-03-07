@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import FilterableProductTable from "./searchDemo.js"
 import Clock from "./clock.js"
 import ClickEvent from"./clickEvent.js"
 import {ConditionLayout} from "./conditionLayout.js"
@@ -165,6 +166,8 @@ class Game extends React.Component {
 // ========================================
 const element = (
   <div>
+    <FilterableProductTable/>
+    <hr/>
     <Game />
     <ClickEvent/>
     <ConditionLayout/>
