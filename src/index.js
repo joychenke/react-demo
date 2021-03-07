@@ -8,6 +8,7 @@ import {ListItem} from "./listItem.js"
 import { Form } from './form.js'
 import { Calculator } from './statusElevate.js'
 import { Combination } from './combination.js'
+import {Uncontrolled} from "./uncontrolled.js"
 import './index.css'
 
 // 修改成函数组件Square，绑定的方式还是花括号
@@ -166,6 +167,8 @@ class Game extends React.Component {
 // ========================================
 const element = (
   <div>
+    <Uncontrolled/>
+    <hr></hr>
     <FilterableProductTable/>
     <hr/>
     <Game />
