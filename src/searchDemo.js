@@ -8,6 +8,22 @@ const res = [
   {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
   {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
 ];
+
+const getData = () => {
+  return new Promise(resolve => {
+    const data = [
+      {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
+      {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
+      {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
+      {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
+      {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
+      {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
+    ];
+    setTimeout(() => {
+      return resolve(data)
+    }, 2000);
+  })
+}
 // 整个示例应用的整体
 class FilterableProductTable extends React.Component{
   constructor(props) {
@@ -15,6 +31,7 @@ class FilterableProductTable extends React.Component{
     this.handleOnSearch = this.handleOnSearch.bind(this);
     this.handleOnCheck = this.handleOnCheck.bind(this)
     this.state = {
+      resultData : [],
       filterText: "",
       inStockOnly: false
     }
@@ -29,8 +46,24 @@ class FilterableProductTable extends React.Component{
       filterText: value
     })
   }
+  componentDidMount() {
+    getData().then(res => {
+      this.setState({
+        resultData: res
+      })
+    })
+  }
   render() {
-    const productsObj = res.reduce((obj, item) => {
+    const resultData = this.state.resultData
+    if(!resultData.length){
+      return  <SearchBar 
+      filterText={this.state.filterText} 
+      inStockOnly={this.state.inStockOnly}
+      onCheck={this.handleOnCheck}
+      onSearch={this.handleOnSearch}
+      />
+    }
+    const productsObj = resultData.reduce((obj, item) => {
       if(!Object.keys(obj).length || !obj[item.category]) {
         obj[item.category] = [item]
         return obj
