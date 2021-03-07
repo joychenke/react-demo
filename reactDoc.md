@@ -5,7 +5,7 @@
 2. JSX 是一个表达式。里面传字符串用引号，传变量用花括号。花括号和引号只能二选一。不能一起用。
 3. JSX语法更接近js，class是className，tabindex是tabIndex，都是用的驼峰命名法
 
-### 元素渲染
+## 元素渲染
 1. 大多数 React 应用只会调用一次 ReactDOM.render()
 
 ## 组件和props
@@ -63,24 +63,24 @@
 5. key只能作为元素的key属性，不会传给子组件。比如子组件中，不能读出父组件的 props.key
 6. JSX表达式中，可以嵌入map
 
-### 表单
+## 表单
 1. state的变量是表单元素的唯一数据数源，这样的表单元素是受控组件。
 2. input输入框，textarea输入框，select选择框，都是受控组件，都用value属性绑定state里对应的属性值，来控制回显的内容
 3. type是file的文件标签，由于其value是只读属性，因此是react的非受控组价
 4. 当一个form表单中有多个表单元素，可给每个表单元素添加name属性，用`ev.target.name`判断，change事件是被哪个表单元素触发，具体可看例子
 5. 当受控表单绑定了value，但是不加onChage事件时，理论上表单将不可编辑，但是如果绑定的value变为null或undefined，表单就又可以继续编辑了
 
-### 状态提升
+## 状态提升
 1. 当多个组件需要反映相同的变化数据，可以将共享状态提升到最近的共同父组件中去
 2. 如果某些数据可以由 props 或 state 推导得出，那么它就不应该存在于 state 中
 
-### 组合 vs 继承
+## 组合 vs 继承
 1. 父组件JSX 标签中的所有内容都会作为props的children属性传给子组件 (和Vue中的default slot 使用和渲染效果一样)
 2. 子组件中，可以通过props的不同属性，指定不同的“坑”，父组件按照子组件定义的“坑”的名称（props中的属性名）来传值就行（和Vue中的具名slot使用和渲染效果一样）
 3. 不管是函数组件，还是class组件，都能用“组合”
 4. 总结：子组件中的props.children，接收的是父组件JSX标签中传过来的内容，传的内容写在JSX标签里；子组件props[someProp]，接收的是someProp属性传过来的内容，传的内容是JSX标签的属性。
 
-### React哲学
+## React哲学
 1. 一个React组件，原则上，只负责一个功能
 2. 拆分组件 -> 创建静态版本
 3. 创建静态版本阶段，组件不要用state属性，都用props来传递数据
